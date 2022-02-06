@@ -1,13 +1,12 @@
 import express from "express";
 import cors from "cors";
-import joi from "joi";
-import dotenv from "dotenv";
-import { MongoClient } from "mongodb";
-dotenv.config()
-
+import router from "./routes/index.js";
 
 const server = express();
 server.use(cors());
 server.use(express.json())
+server.use(router)
 
-const mongoClient = new MongoClient(process.env.MONGO_URI);
+server.listen(5000, () => {
+    console.log('http://localhost:5000');
+});
