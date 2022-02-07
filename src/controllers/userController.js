@@ -8,10 +8,10 @@ async function records(req, res){
         const session = await db.sessions.findOne({token});
 
         const user = await db.users.findOne({_id: session.userId})
-        const recordsList = await db.records.find({}).toArray();
-        const arr = recordsList.filter(iten => iten.userId === user.email)
+        const records = await db.records.find({}).toArray();
+        const recordsListUser = records.filter(iten => iten.userId === user.email)
 
-        res.status(200).send(arr)
+        res.status(200).send({records: recordsListUser, name: user.name})
     } catch (error) {
         res.sendStatus(500);
     }
