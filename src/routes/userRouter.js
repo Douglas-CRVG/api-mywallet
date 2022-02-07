@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { records } from "../controllers/userController.js";
+import { record, records } from "../controllers/userController.js";
 import tokenValidationMiddleware from "../middlewares/tokenValidationMiddleware.js";
 
 const userRouter = Router();
-userRouter.get("/records", tokenValidationMiddleware, records)
+userRouter.use(tokenValidationMiddleware)
+userRouter.get("/records", records);
+userRouter.post("/record", record)
 
 export default userRouter;
